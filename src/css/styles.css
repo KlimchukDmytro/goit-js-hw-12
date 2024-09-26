@@ -6,13 +6,94 @@
 */
 /* Common styles */
 @import url('./reset.css');
-@import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+.hidden {
+  display: none;
+}
+
+.loader {
+  justify-content: center;
+  align-items: center;
+}
+
+.iziToast {
+  top: 10px;
+  left: 10px;
+  position: fixed;
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.search-form input {
+  height: 40px;
+  width: 272px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #808080;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 91px;
+  height: 40px;
+  background-color: #4E75FF;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6C8CFF;
+}
+
+.gallery {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.gallery__item {
+  width: 360px;
+  height: auto;
+  border: 2px solid #111;
+  display: flex;
+  
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+  padding-top: 4px;
+}
+
+.info p {
+  flex: 0 0 calc(25% - 10px);
+  text-align: center;
+  margin: 0 5px;
+}
+
+.info b {
+  display: block;
+}
+
+p {
+  font-weight: 400;
+  font-size: 12px;
+  color: #2e2f42;
+}
+
+b {
+  font-weight: 600;
+  font-size: 12px;
+  color: #2e2f42;
+}
