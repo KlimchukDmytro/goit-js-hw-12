@@ -2,13 +2,8 @@ import { fetchImages } from './js/pixabay-api.js';
 import { renderImages, clearGallery } from './js/render-functions.js';
 
 const form = document.querySelector('#search-form');
-const loadMoreBtn = document.createElement('button');
+const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
-
-loadMoreBtn.textContent = 'Load more';
-loadMoreBtn.classList.add('load-more');
-loadMoreBtn.style.display = 'none';  // Спочатку кнопка схована
-document.body.append(loadMoreBtn);
 
 let query = '';
 let page = 1;
@@ -56,14 +51,14 @@ async function onLoadMore() {
 
   try {
     const data = await fetchImages(query, page);
+    const oldScrollPosition = window.scrollY; 
     renderImages(data.hits);
 
-    const galleryItemHeight = document
-      .querySelector('.gallery-item')
-      .getBoundingClientRect().height;
+    const gallery = document.querySelector('.gallery');
+    const newScrollPosition = gallery.scrollHeight; 
 
-    window.scrollBy({
-      top: galleryItemHeight * 2,
+    window.scrollTo({
+      top: oldScrollPosition + (newScrollPosition - oldScrollPosition), 
       behavior: 'smooth',
     });
 
@@ -83,5 +78,5 @@ function toggleLoader(show) {
 }
 
 function toggleLoadMoreBtn(show) {
-  loadMoreBtn.style.display = show ? 'block' : 'none';
+  loadMoreBtn.classList.toggle('hidden', !show);
 }
