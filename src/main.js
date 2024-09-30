@@ -1,3 +1,6 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 import { fetchImages } from './js/pixabay-api.js';
 import { renderImages, clearGallery } from './js/render-functions.js';
 
@@ -17,7 +20,7 @@ async function onSearch(event) {
   query = event.currentTarget.elements.searchQuery.value.trim();
 
   if (!query) {
-    alert('Please enter a search query');
+    showError('Please enter a search query');
     return;
   }
 
@@ -31,7 +34,7 @@ async function onSearch(event) {
     totalHits = data.totalHits;
 
     if (data.hits.length === 0) {
-      alert('No images found');
+      showError('No images found');
     } else {
       renderImages(data.hits);
       if (totalHits > page * 15) {
@@ -39,7 +42,7 @@ async function onSearch(event) {
       }
     }
   } catch (error) {
-    console.error('Error:', error.message);
+    showError('Error: ' + error.message);
   } finally {
     toggleLoader(false);
   }
@@ -51,23 +54,23 @@ async function onLoadMore() {
 
   try {
     const data = await fetchImages(query, page);
-    const oldScrollPosition = window.scrollY; 
+    const oldScrollPosition = window.scrollY;
     renderImages(data.hits);
 
     const gallery = document.querySelector('.gallery');
-    const newScrollPosition = gallery.scrollHeight; 
+    const newScrollPosition = gallery.scrollHeight;
 
     window.scrollTo({
-      top: oldScrollPosition + (newScrollPosition - oldScrollPosition), 
+      top: oldScrollPosition + (newScrollPosition - oldScrollPosition),
       behavior: 'smooth',
     });
 
     if (page * 15 >= totalHits) {
       toggleLoadMoreBtn(false);
-      alert("You've reached the end of search results");
+      showError("You've reached the end of search results", 'warning');
     }
   } catch (error) {
-    console.error('Error:', error.message);
+    showError('Error: ' + error.message);
   } finally {
     toggleLoader(false);
   }
@@ -79,4 +82,16 @@ function toggleLoader(show) {
 
 function toggleLoadMoreBtn(show) {
   loadMoreBtn.classList.toggle('hidden', !show);
+}
+
+
+function showError(message, type = 'error') {
+  iziToast.show({
+    title: type === 'error' ? 'Error' : 'Warning',
+    message: message,
+    position: 'topRight', 
+    backgroundColor: type === 'error' ? 'red' : 'yellow',
+    timeout: 5000,
+    color: '#111', 
+  });
 }
