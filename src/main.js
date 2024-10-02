@@ -10,8 +10,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const form = document.querySelector('#search-form');
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('.loader');
-let galleryLightbox = new SimpleLightbox('.gallery a'); // Ініціалізація SimpleLightbox
-
+let galleryLightbox = new SimpleLightbox('.gallery a'); 
 let query = '';
 let page = 1;
 let totalHits = 0;
