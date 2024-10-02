@@ -86,6 +86,7 @@ main {
   flex-direction: column;
 }
 
+
 .info {
   display: flex;
   justify-content: space-between;
