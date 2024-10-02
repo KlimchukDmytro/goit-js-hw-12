@@ -3,8 +3,8 @@ export function renderImages(images) {
   const gallery = document.querySelector('.gallery');
   const markup = images
     .map(
-      (image) => `
-        <li class="gallery-item">
+      (image) =>
+        `<li class="gallery-item">
           <a href="${image.largeImageURL}">
             <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
           </a>
@@ -19,14 +19,6 @@ export function renderImages(images) {
     .join('');
   gallery.insertAdjacentHTML('beforeend', markup);
 }
-
-export function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
-}
-
-
-
 
 
 
