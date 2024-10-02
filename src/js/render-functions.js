@@ -1,5 +1,4 @@
 export function renderImages(images) {
-  
   const gallery = document.querySelector('.gallery');
   const markup = images
     .map(
@@ -14,19 +13,12 @@ export function renderImages(images) {
             <p><b>Comments:</b> ${image.comments}</p>
             <p><b>Downloads:</b> ${image.downloads}</p>
           </div>
-        </li>`
+        </li>
+      `
     )
     .join('');
   gallery.insertAdjacentHTML('beforeend', markup);
 }
-
-export function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
-}
-
-
-
 
 
 
